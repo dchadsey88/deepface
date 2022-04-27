@@ -1,0 +1,45 @@
+services:
+
+  web:
+    container_name: web
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0 --port 5000
+    volumes:
+      - .:/app
+    ports:
+      - 5000:5000
+    restart: always
+
+  redis:
+    container_name: redis
+    image: redis:6.2-alpine
+  
+  # celery_worker:
+  #   container_name: celery_worker
+  #   build: .
+  #   command: celery -A app.celery_worker.celery worker --loglevel=info --concurrency=1
+  #   volumes:
+  #     - .:/app
+  #   environment:
+  #     - CELERY_BROKER_URL=${CELERY_BROKER_URL}
+  #     - CELERY_RESULT_BACKEND=${CELERY_RESULT_BACKEND}
+  #   restart: always
+  #   depends_on:
+  #     - web
+  #     - redis
+
+  # flower:
+  #   container_name: flower
+  #   build: .
+  #   command: celery -A app.celery_worker.celery flower --port=5555
+  #   volumes:
+  #     - .:/app
+  #   ports:
+  #     - 5556:5555
+  #   environment:
+  #     - CELERY_BROKER_URL=${CELERY_BROKER_URL}
+  #     - CELERY_RESULT_BACKEND=${CELERY_RESULT_BACKEND}
+  #   depends_on:
+  #     - app
+  #     - redis
+  #     - celery_worker

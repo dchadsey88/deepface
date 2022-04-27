@@ -1,0 +1,12 @@
+deepface==0.0.72
+Pillow==8.4.0
+numpy==1.21.4
+asyncio==3.4.3
+aiohttp==3.8.1
+fastapi==0.73.0
+uvicorn==0.16.0
+celery==5.2.3
+flower==1.0.0
+redis==4.1.3
+python-dotenv == 0.19.2
+requests==2.26.0
